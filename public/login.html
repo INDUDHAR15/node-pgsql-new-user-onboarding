@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Login</title>
+</head>
+<body>
+    <h1>School Application Login</h1>
+    <div id="message" style="color: green; font-weight: bold;"></div>
+
+    <h2>Standard Login</h2>
+    <form action="/login" method="POST">
+        <label for="user_id">User ID:</label>
+        <input type="text" id="user_id" name="user_id" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <button type="submit">Log In</button>
+    </form>
+    
+    <p style="margin-top: 20px;">
+        New user? Check your email/SMS for the unique account setup link.<br>
+        (The setup link is printed in the backend console on user creation.)
+    </p>
+
+    <script>
+        // Display success message after password creation redirect
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const messageDiv = document.getElementById('message');
+            
+            if (urlParams.get('setup') === 'success') {
+                messageDiv.textContent = 'Password created successfully! Please log in with your User ID and new password.';
+                // Clean the URL
+                history.replaceState(null, '', window.location.pathname);
+            }
+        });
+    </script>
+</body>
+</html>
